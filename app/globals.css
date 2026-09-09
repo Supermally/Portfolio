@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #faf8f5;
+  --foreground: #18181b;
+  --color-paper: #faf8f5;
+  --color-paper-card: #f4efe6;
+  --color-border: #e4dcce;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-editorial: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', Menlo, monospace;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Subtle Technical Drafting Paper Grid (Full Width 100vw) */
+.drafting-grid-full {
+  background-image: 
+    linear-gradient(to right, rgba(140, 130, 115, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(140, 130, 115, 0.12) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Subtle Technical Drafting Paper Grid */
+.transit-map-paper {
+  background-image: 
+    linear-gradient(to right, rgba(140, 130, 115, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(140, 130, 115, 0.08) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Authentic Subway White Tile Grid for Ground-Level Concourse */
+.subway-tile-bg {
+  background-color: #f7f5f0;
+  background-image:
+    linear-gradient(to right, rgba(180, 175, 165, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(180, 175, 165, 0.25) 1px, transparent 1px);
+  background-size: 60px 30px;
+}
+
+.subway-tile-dark {
+  background-color: #121214;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 60px 30px;
+}
+
+/* Engineering Crosshatch Placeholder Pattern */
+.transit-hatch-pattern {
+  background-color: #f4efe6;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(140, 130, 115, 0.12),
+    rgba(140, 130, 115, 0.12) 2px,
+    transparent 2px,
+    transparent 12px
+  );
+}
+
+/* Pulse animation for active train and live status indicators */
+@keyframes train-pulse {
+  0% {
+    opacity: 0.85;
+    stroke-width: 2.5px;
+  }
+  50% {
+    opacity: 0.25;
+    stroke-width: 4px;
+  }
+  100% {
+    opacity: 0.85;
+    stroke-width: 2.5px;
+  }
+}
+
+.train-pulse {
+  animation: train-pulse 2s infinite ease-in-out;
+}
+
+/* Solari / LED Matrix Glows */
+.led-amber-glow {
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.6), 0 0 20px rgba(251, 191, 36, 0.2);
+}
+
+.led-green-glow {
+  text-shadow: 0 0 8px rgba(52, 211, 153, 0.6), 0 0 20px rgba(52, 211, 153, 0.2);
+}
+
+/* Porcelain Enamel Signage Bevel */
+.porcelain-sign {
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
+    0 10px 25px -5px rgba(0, 0, 0, 0.3),
+    0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+/* MTA Outfront Screen Bezel */
+.mta-screen-bezel {
+  box-shadow:
+    inset 0 0 0 3px #27272a,
+    inset 0 0 0 4px #09090b,
+    0 20px 40px -15px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
