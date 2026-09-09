@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Cormorant_Garamond, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { ContentProvider } from "@/lib/content/ContentProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -85,7 +86,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${cormorant.variable} ${ibmPlexMono.variable}`}>
       <body className="min-h-screen bg-[#faf8f5] text-zinc-900 antialiased selection:bg-orange-500/20 selection:text-orange-950 font-sans">
         <div className="fixed inset-0 pointer-events-none transit-map-paper z-0 opacity-70" aria-hidden="true" />
-        <div className="relative z-10">{children}</div>
+        <ContentProvider><div className="relative z-10">{children}</div></ContentProvider>
       </body>
     </html>
   );

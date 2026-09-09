@@ -2,8 +2,10 @@
 
 import React from "react";
 import { Download, Award, GraduationCap, Code, Wrench, Languages, Briefcase, CreditCard, CheckCircle2 } from "lucide-react";
+import { useSiteContent } from "@/lib/content/ContentProvider";
 
 export function Resume() {
+  const { resume } = useSiteContent();
   const experiences = [
     {
       period: "APRIL 2026 — PRESENT",
@@ -107,6 +109,9 @@ export function Resume() {
       skills: ["Data Analysis", "Computer Engineering", "Web Design", "Statistical Modeling", "Worksite Compliance"],
     },
   ];
+  const displayedExperiences = resume.experiences.length ? resume.experiences : experiences;
+  const displayedCertifications = resume.certifications.length ? resume.certifications : certifications;
+  const displayedSkillCategories = resume.skillCategories.length ? resume.skillCategories : skillCategories;
 
   return (
     <section id="resume" className="py-20 border-b border-zinc-300 bg-[#f4efe6]/60 relative select-none">
@@ -124,7 +129,7 @@ export function Resume() {
           </div>
 
           <a
-            href="/assets/resume-placeholder.pdf"
+            href={resume.pdfUrl}
             download="Malachi_McDonald_Resume.pdf"
             className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-zinc-950 hover:bg-zinc-800 text-white rounded-xl font-sans text-xs font-black transition-all shadow-md group cursor-pointer"
           >
@@ -138,15 +143,15 @@ export function Resume() {
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 pb-4 mb-4">
             <div className="flex items-center gap-3">
               <span className="w-4 h-4 rounded-full bg-[#ff6319] shadow-sm" />
-              <h3 className="font-sans font-black text-xl text-zinc-950">Malachi McDonald</h3>
-              <span className="font-mono text-xs text-zinc-500 font-bold">Brooklyn, NY</span>
+              <h3 className="font-sans font-black text-xl text-zinc-950">{resume.name}</h3>
+              <span className="font-mono text-xs text-zinc-500 font-bold">{resume.location}</span>
             </div>
             <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 font-mono text-xs font-extrabold uppercase">
-              ACTIVE CANDIDATE
+              {resume.status}
             </span>
           </div>
           <p className="text-sm sm:text-base text-zinc-700 font-sans leading-relaxed">
-            Site Monitor with experience managing participant records, worksite compliance, and payroll processing for NYC DYCD-administered youth workforce programs. Skilled in Microsoft 365, Excel, and ADP Payroll, with a background in computer engineering, programming, and cloud-based data analysis.
+            {resume.summary}
           </p>
         </div>
 
@@ -160,7 +165,7 @@ export function Resume() {
             </div>
 
             <div className="space-y-4">
-              {experiences.map((exp, idx) => (
+              {displayedExperiences.map((exp, idx) => (
                 <div
                   key={idx}
                   className="p-6 rounded-2xl bg-white border border-zinc-300 shadow-sm hover:shadow-md transition-shadow"
@@ -206,14 +211,14 @@ export function Resume() {
               </div>
               <div>
                 <h4 className="font-sans font-black text-base text-zinc-950">
-                  DeWitt Clinton High School
+                  {resume.education.school}
                 </h4>
                 <div className="text-xs font-bold text-zinc-600 font-sans mt-0.5">
-                  Computer &amp; Information Sciences and Support Services
+                  {resume.education.program}
                 </div>
                 <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500 font-semibold mt-2 pt-2 border-t border-zinc-200">
-                  <span>Bronx, NY</span>
-                  <span className="font-bold text-zinc-900">Graduation: 2025</span>
+                  <span>{resume.education.location}</span>
+                  <span className="font-bold text-zinc-900">Graduation: {resume.education.graduation}</span>
                 </div>
               </div>
             </div>
@@ -226,7 +231,7 @@ export function Resume() {
               </div>
 
               <div className="space-y-3">
-                {certifications.map((cert, idx) => (
+                {displayedCertifications.map((cert, idx) => (
                   <div
                     key={idx}
                     className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 flex items-start justify-between gap-3"
@@ -255,7 +260,7 @@ export function Resume() {
               </div>
 
               <div className="space-y-4">
-                {skillCategories.map((cat, idx) => (
+                {displayedSkillCategories.map((cat, idx) => (
                   <div key={idx} className="space-y-1.5">
                     <div className="text-[11px] font-mono font-bold text-zinc-500 uppercase">
                       {cat.category}
@@ -279,14 +284,7 @@ export function Resume() {
                     <Languages className="w-3.5 h-3.5 text-zinc-400" />
                     <span>Languages</span>
                   </div>
-                  <div className="flex flex-wrap gap-2 text-xs font-sans text-zinc-700">
-                    <span className="px-2.5 py-1 rounded-md bg-zinc-50 border border-zinc-200 font-medium">
-                      <strong>English</strong> (Native)
-                    </span>
-                    <span className="px-2.5 py-1 rounded-md bg-zinc-50 border border-zinc-200 font-medium">
-                      <strong>German</strong> (Limited working proficiency)
-                    </span>
-                  </div>
+                  <div className="flex flex-wrap gap-2 text-xs font-sans text-zinc-700">{resume.languages.map((language) => <span key={language.name} className="px-2.5 py-1 rounded-md bg-zinc-50 border border-zinc-200 font-medium"><strong>{language.name}</strong> ({language.proficiency})</span>)}</div>
                 </div>
               </div>
             </div>

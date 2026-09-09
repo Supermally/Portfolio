@@ -2,10 +2,12 @@
 
 import React, { useState } from "react";
 import { Mail, Github, Linkedin, ExternalLink, ArrowUpRight, Copy, Check, Compass } from "lucide-react";
+import { useSiteContent } from "@/lib/content/ContentProvider";
 
 export function Contact() {
+  const { contact } = useSiteContent();
   const [copied, setCopied] = useState(false);
-  const email = "malachimcd1@gmail.com";
+  const email = contact.email;
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(email);
@@ -13,28 +15,10 @@ export function Contact() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const platforms = [
-    {
-      id: "platform-github",
-      label: "PLATFORM A // CODE REPOSITORIES",
-      channel: "GitHub",
-      handle: "@Supermally", // PLACEHOLDER
-      link: "https://github.com/Supermally",
-      desc: "Hardware HDL, firmware kernels, and simulation sources.",
-      icon: Github,
-      color: "#ff6319",
-    },
-    {
-      id: "platform-linkedin",
-      label: "PLATFORM B // PROFESSIONAL NETWORK",
-      channel: "LinkedIn",
-      handle: "in/malachi-mcdonald-546ba4209",
-      link: "https://www.linkedin.com/in/malachi-mcdonald-546ba4209/",
-      desc: "Engineering career history and research affiliations.",
-      icon: Linkedin,
-      color: "#0039a6",
-    },
-  ];
+  const platforms = contact.platforms.map((platform) => ({
+    ...platform,
+    icon: platform.channel === "GitHub" ? Github : platform.channel === "LinkedIn" ? Linkedin : ExternalLink,
+  }));
 
   return (
     <section id="contact" className="py-20 bg-[#121214] text-white relative">
@@ -51,7 +35,7 @@ export function Contact() {
             </h2>
           </div>
           <p className="text-zinc-400 text-xs sm:text-sm font-sans max-w-md">
-            Direct dispatch channels and external repository platforms. Connect for hardware collaborations or technical inquiries.
+            {contact.availability}
           </p>
         </div>
 
@@ -69,7 +53,7 @@ export function Contact() {
                 Send Direct Transmission
               </h3>
               <p className="text-zinc-400 text-sm font-sans leading-relaxed">
-                Open for engineering roles, technical advisory on hardware/aerospace programs, and systems architecture inquiries.
+                {contact.intro}
               </p>
 
               <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-between gap-3">
@@ -101,7 +85,7 @@ export function Contact() {
             </div>
 
             <div className="pt-6 border-t border-zinc-800 mt-6 flex items-center justify-between font-mono text-xs text-zinc-500">
-              <span>RESPONSE WINDOW: 24–48 HRS</span>
+              <span>RESPONSE WINDOW: {contact.responseWindow}</span>
               <span>{"// PGP KEY ON REQUEST"}</span>
             </div>
           </div>

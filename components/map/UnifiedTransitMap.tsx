@@ -4,9 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { STATIONS, Station } from "@/lib/data/projects";
-import { LINES } from "@/lib/data/skills";
-import { WAYPOINTS, Waypoint } from "@/lib/data/certifications";
+import type { Station } from "@/lib/data/projects";
+import type { Waypoint } from "@/lib/data/certifications";
+import { useSiteContent } from "@/lib/content/ContentProvider";
 import { TransferBullet } from "./TransferBullet";
 import { CurrentStatus } from "@/components/status/CurrentStatus";
 import { useReducedMotion } from "@/lib/hooks/useReducedMotion";
@@ -39,6 +39,7 @@ export function UnifiedTransitMap({
   onSelectStation,
   onSelectLine,
 }: UnifiedTransitMapProps) {
+  const { stations: STATIONS, lines: LINES, waypoints: WAYPOINTS } = useSiteContent();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapSvgGroupRef = useRef<SVGGElement>(null);
   const textOverlayRef = useRef<HTMLDivElement>(null);
@@ -87,7 +88,7 @@ export function UnifiedTransitMap({
         setActiveModalStation(station);
       }
     }
-  }, [selectedStationId]);
+  }, [selectedStationId, STATIONS]);
 
   // Master Spatial Camera: Smooth Scroll Zoom Parallax & Spine Descent
   useEffect(() => {
@@ -776,7 +777,7 @@ export function UnifiedTransitMap({
                   textAnchor="middle"
                   className="font-sans font-black text-sm fill-zinc-950 select-none group-hover:fill-[#ff6319] transition-colors"
                 >
-                  Grand Central Hub
+                  {STATIONS[0]?.title || "Grand Central Hub"}
                 </text>
                 <text
                   x="0"
@@ -784,7 +785,7 @@ export function UnifiedTransitMap({
                   textAnchor="middle"
                   className="font-mono text-xs fill-zinc-500 font-bold"
                 >
-                  [Main 3-Line Interchange]
+                  [{STATIONS[0]?.date || "Main 3-Line Interchange"}]
                 </text>
               </g>
 
@@ -864,10 +865,10 @@ export function UnifiedTransitMap({
                     y="12"
                     className="font-sans font-extrabold text-xs fill-zinc-950 group-hover:fill-[#ff6319] transition-colors"
                   >
-                    Porta — Windows App Compatibility Runner
+                    {STATIONS[1]?.title || "Porta — Windows App Compatibility Runner"}
                   </text>
                   <text x="24" y="26" className="font-mono text-[11px] text-amber-700 font-bold">
-                    [STOP 01 • ACTIVE WORK]
+                    [{STATIONS[1]?.date || "STOP 01 • ACTIVE WORK"}]
                   </text>
                 </g>
 
@@ -902,7 +903,7 @@ export function UnifiedTransitMap({
                     textAnchor="end"
                     className="font-sans font-extrabold text-xs fill-zinc-950 group-hover:fill-[#0039a6] transition-colors"
                   >
-                    Aerospace Project Idea #1
+                    {STATIONS[2]?.title || "Aerospace Project Idea #1"}
                   </text>
                   <text
                     x="-16"
@@ -910,7 +911,7 @@ export function UnifiedTransitMap({
                     textAnchor="end"
                     className="font-mono text-[11px] fill-blue-700 font-bold"
                   >
-                    [UNDER CONSTRUCTION]
+                    [{STATIONS[2]?.date || "UNDER CONSTRUCTION"}]
                   </text>
                 </g>
 
@@ -945,10 +946,10 @@ export function UnifiedTransitMap({
                     y="4"
                     className="font-sans font-extrabold text-xs fill-zinc-950 group-hover:fill-[#ff6319] transition-colors"
                   >
-                    Engineering Project Idea #1
+                    {STATIONS[3]?.title || "Engineering Project Idea #1"}
                   </text>
                   <text x="20" y="18" className="font-mono text-[11px] text-amber-700 font-semibold">
-                    [UNDER CONSTRUCTION]
+                    [{STATIONS[3]?.date || "UNDER CONSTRUCTION"}]
                   </text>
                 </g>
 
@@ -981,10 +982,10 @@ export function UnifiedTransitMap({
                     y="4"
                     className="font-sans font-extrabold text-xs fill-zinc-950 group-hover:fill-[#ee352e] transition-colors"
                   >
-                    Ideology Test &amp; Political Compass
+                    {STATIONS[4]?.title || "Ideology Test & Political Compass"}
                   </text>
                   <text x="16" y="18" className="font-mono text-[11px] fill-amber-700 font-semibold">
-                    [STOP 01 • PRE-BUILD MODEL]
+                    [{STATIONS[4]?.date || "STOP 01 • PRE-BUILD MODEL"}]
                   </text>
                 </g>
 
@@ -1019,10 +1020,10 @@ export function UnifiedTransitMap({
                     y="4"
                     className="font-sans font-extrabold text-xs fill-zinc-950 group-hover:fill-[#ee352e] transition-colors"
                   >
-                    Policy Project Idea #1
+                    {STATIONS[5]?.title || "Policy Project Idea #1"}
                   </text>
                   <text x="18" y="18" className="font-mono text-[11px] fill-amber-700 font-semibold">
-                    [UNDER CONSTRUCTION]
+                    [{STATIONS[5]?.date || "UNDER CONSTRUCTION"}]
                   </text>
                 </g>
 
@@ -1056,10 +1057,10 @@ export function UnifiedTransitMap({
                     y="4"
                     className="font-sans font-extrabold text-xs fill-zinc-950 group-hover:fill-[#ff6319] transition-colors"
                   >
-                    Engineering Project Idea #2
+                    {STATIONS[6]?.title || "Engineering Project Idea #2"}
                   </text>
                   <text x="16" y="18" className="font-mono text-[11px] fill-amber-700 font-semibold">
-                    [UNDER CONSTRUCTION]
+                    [{STATIONS[6]?.date || "UNDER CONSTRUCTION"}]
                   </text>
                 </g>
               </g>

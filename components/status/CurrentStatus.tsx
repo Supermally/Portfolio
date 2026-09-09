@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { STATIONS } from "@/lib/data/projects";
+import { useSiteContent } from "@/lib/content/ContentProvider";
 import { ArrowRight, MapPin, Radio, Cpu, CheckCircle2, Clock, Wrench, AlertCircle } from "lucide-react";
 
 interface CurrentStatusProps {
@@ -9,6 +9,7 @@ interface CurrentStatusProps {
 }
 
 export function CurrentStatus({ onSelectStation }: CurrentStatusProps) {
+  const { stations: STATIONS } = useSiteContent();
   // Real-time clock for authentic EAP screen header
   const [timeStr, setTimeStr] = useState("6:44 pm");
 

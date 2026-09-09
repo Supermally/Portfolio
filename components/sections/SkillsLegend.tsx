@@ -1,9 +1,7 @@
 "use client";
 
 import React from "react";
-import { LINES } from "@/lib/data/skills";
-import { STATIONS } from "@/lib/data/projects";
-import { WAYPOINTS } from "@/lib/data/certifications";
+import { useSiteContent } from "@/lib/content/ContentProvider";
 import { TransferBullet } from "@/components/map/TransferBullet";
 import { Award, Compass } from "lucide-react";
 
@@ -18,6 +16,7 @@ export function SkillsLegend({
   onSelectLine,
   onSelectStation,
 }: SkillsLegendProps) {
+  const { lines: LINES, stations: STATIONS, waypoints: WAYPOINTS } = useSiteContent();
   return (
     <section id="skills" className="py-16 border-b border-zinc-300 bg-[#faf8f5] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,5 +1,6 @@
 import React from "react";
-import { LINES, Line } from "@/lib/data/skills";
+import type { Line } from "@/lib/data/skills";
+import { useSiteContent } from "@/lib/content/ContentProvider";
 
 interface TransferBulletProps {
   lineIds: string[];
@@ -12,6 +13,7 @@ export function TransferBullet({
   className = "",
   size = "md",
 }: TransferBulletProps) {
+  const { lines: LINES } = useSiteContent();
   const lineDetails = lineIds
     .map((id) => LINES.find((l) => l.id === id))
     .filter((l): l is Line => !!l);

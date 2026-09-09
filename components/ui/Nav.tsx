@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { LINES } from "@/lib/data/skills";
+import { useSiteContent } from "@/lib/content/ContentProvider";
 import { useSpatialCamera, SpatialMilestone } from "@/lib/hooks/useSpatialCamera";
 import { Volume2 } from "lucide-react";
 
@@ -17,6 +17,7 @@ const MALACHI_BULLETS = [
 ];
 
 export function Nav() {
+  const { lines: LINES } = useSiteContent();
   const { activeSection, isScrolled, navigateTo, milestones } = useSpatialCamera();
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
