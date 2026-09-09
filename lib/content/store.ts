@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { DEFAULT_CONTENT } from "./defaults";
+import { extractJsonFromGitHubContents } from "./parseContent";
 import type { SiteContent } from "./types";
 
 const CONTENT_PATH = "data/site-content.json";
@@ -28,12 +29,16 @@ function normalizeContent(content: SiteContent): SiteContent {
 
 async function readGitHubContent(): Promise<SiteContent | null> {
   const { owner, repo, branch, token } = repoSettings();
-  const headers: HeadersInit = { Accept: "application/vnd.github.raw+json", "User-Agent": "grand-central-admin" };
+  const headers: HeadersInit = { Accept: "application/vnd.github+json", "User-Agent": "grand-central-admin" };
   if (token) headers.Authorization = `Bearer ${token}`;
-  const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${CONTENT_PATH}?ref=${encodeURIComponent(branch)}`, { headers, cache: "no-store" });
-  if (!response.ok) return null;
-  const parsed = await response.json();
-  return isContent(parsed) ? normalizeContent(parsed) : null;
+  try {
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${CONTENT_PATH}?ref=${encodeURIComponent(branch)}`, { headers, cache: "no-store" });
+    if (!response.ok) return null;
+    const parsed = extractJsonFromGitHubContents(await response.json());
+    return isContent(parsed) ? normalizeContent(parsed) : null;
+  } catch {
+    return null;
+  }
 }
 
 async function readLocalContent(): Promise<SiteContent | null> {

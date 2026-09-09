@@ -48,7 +48,7 @@ export function CurrentStatus({ onSelectStation }: CurrentStatusProps) {
   return (
     <div id="status" className="w-full relative z-20 select-none pb-4">
       {/* Concourse Wall Header — Offset right of tracks (pl-28 sm:pl-44) */}
-      <div className="px-0 lg:pl-44 flex flex-wrap items-center justify-between gap-3 border-b border-zinc-300 pb-3 mb-4 sm:mb-6">
+      <div className="px-0 flex flex-wrap items-center justify-between gap-3 border-b border-zinc-300 pb-3 mb-4 sm:mb-6">
         <div className="flex items-center gap-3">
           <span className="w-3 h-3 rounded-full bg-[#ff6319] animate-pulse shadow-md shadow-orange-500/50" />
           <div>
@@ -69,7 +69,7 @@ export function CurrentStatus({ onSelectStation }: CurrentStatusProps) {
       </div>
 
       {/* Dual Light Mode MTA Digital Subway Displays Mounted in Black Enclosure Bezels */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 items-start lg:ml-40">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 items-start">
         {/* ========================================================= */}
         {/* SCREEN 1 (LEFT): LIGHT MODE NEXT TRAIN & ROUTE STRIP     */}
         {/* ========================================================= */}

@@ -341,7 +341,7 @@ export function UnifiedTransitMap({
     <section
       ref={containerRef}
       id="map-hero-unified"
-      className="relative w-full min-h-screen drafting-grid-full bg-[#faf8f5] overflow-hidden select-none"
+      className="relative w-full min-h-screen drafting-grid-full bg-[#faf8f5] overflow-x-hidden select-none"
     >
       {/* Top Map Furniture (Filter Buttons & Symbology) */}
       <div
@@ -1196,8 +1196,8 @@ export function UnifiedTransitMap({
 
         {/* Departure Board Interactive Component (EAP Light Mode Dual Screens) */}
         <div
-          id="departure-board-concourse-overlay"
-          className="relative w-full z-30 px-3 sm:px-8 pointer-events-auto md:absolute md:left-0 md:right-0 md:bottom-6"
+          id="departure-board-concourse"
+          className="relative z-30 w-full border-t border-zinc-300 bg-[#faf8f5] px-3 py-6 sm:px-8 sm:py-8 pointer-events-auto"
         >
           <div className="max-w-7xl mx-auto">
             <CurrentStatus onSelectStation={onSelectStation || undefined} />
