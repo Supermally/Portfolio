@@ -8,12 +8,9 @@ export function extractJsonFromGitHubContents(payload: unknown): unknown {
   if (!payload || typeof payload !== "object") return payload;
 
   const body = payload as { content?: unknown; encoding?: unknown; version?: unknown };
-  const isEnvelope =
-    body.encoding === "base64" &&
-    typeof body.content === "string" &&
-    body.version !== 1;
-
-  if (!isEnvelope) return payload;
+  if (body.encoding !== "base64" || typeof body.content !== "string" || body.version === 1) {
+    return payload;
+  }
 
   const decoded = Buffer.from(body.content.replace(/\s/g, ""), "base64").toString("utf8");
   return JSON.parse(decoded);
