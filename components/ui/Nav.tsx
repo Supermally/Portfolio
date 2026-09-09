@@ -58,14 +58,14 @@ export function Nav() {
             <span className="font-sans font-black text-sm sm:text-base text-zinc-950 tracking-tight leading-none group-hover:text-zinc-700 transition-colors">
               GRAND CENTRAL
             </span>
-            <span className="font-mono text-[9px] text-zinc-500 font-bold tracking-wider uppercase mt-0.5">
+            <span className="hidden sm:block font-mono text-[9px] text-zinc-500 font-bold tracking-wider uppercase mt-0.5">
               TRANSIT SCHEMATIC
             </span>
           </div>
         </div>
 
         {/* Section Anchors linked to Spatial Camera */}
-        <nav className="flex items-center gap-1 sm:gap-2">
+        <nav className="hidden lg:flex items-center gap-1 sm:gap-2">
           {milestones.map((item) => {
             const isActive = activeSection === item.id;
             return (

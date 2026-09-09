@@ -181,7 +181,7 @@ export function SplashScreen({ onEnter, onSkip }: SplashScreenProps) {
         </div>
 
         {/* Black Porcelain Enamel Signboard */}
-        <div className="w-full bg-[#18181b] border-2 border-zinc-700 rounded-2xl px-5 sm:px-6 py-3.5 sm:py-4 shadow-[0_15px_40px_rgba(0,0,0,0.8)] flex items-center justify-between">
+        <div className="w-full bg-[#18181b] border-2 border-zinc-700 rounded-2xl px-3 sm:px-6 py-3.5 sm:py-4 shadow-[0_15px_40px_rgba(0,0,0,0.8)] flex items-center justify-between gap-2">
           <div className="flex items-center gap-3">
             {/* Directional Down Arrow Circle */}
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white flex items-center justify-center text-zinc-950 font-black text-base sm:text-lg shadow-sm">
@@ -268,7 +268,7 @@ export function SplashScreen({ onEnter, onSkip }: SplashScreenProps) {
             onClick={handleCardClick}
             whileHover={{ scale: 1.03, cursor: "grab" }}
             whileTap={{ scale: 0.98, cursor: "grabbing" }}
-            className="relative z-20 w-[320px] sm:w-[410px] h-[200px] sm:h-[256px] rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] border border-yellow-200/50 select-none overflow-hidden shrink-0 flex flex-col justify-between cursor-grab active:cursor-grabbing"
+            className="relative z-20 w-[calc(100vw-2rem)] max-w-[320px] sm:max-w-[410px] h-[190px] sm:h-[256px] rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] border border-yellow-200/50 select-none overflow-hidden shrink-0 flex flex-col justify-between cursor-grab active:cursor-grabbing"
           >
             {/* Plastic Card Gloss Sheen Highlight */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent pointer-events-none" />
@@ -326,7 +326,7 @@ export function SplashScreen({ onEnter, onSkip }: SplashScreenProps) {
             <ArrowRight className="w-4 h-4 text-zinc-950" />
           </button>
 
-          <p className="text-[11px] font-mono text-zinc-400">
+          <p className="max-w-xs text-center text-[10px] sm:text-[11px] font-mono text-zinc-400">
             🔊 Drag card to the right or click to swipe with amplified announcement
           </p>
         </div>
@@ -335,7 +335,7 @@ export function SplashScreen({ onEnter, onSkip }: SplashScreenProps) {
       {/* ================================================================= */}
       {/* 3. BOTTOM FOOTER & QUIET ENTRY OPTION                             */}
       {/* ================================================================= */}
-      <div className="relative z-10 flex items-center justify-between w-full max-w-2xl pt-2 border-t border-zinc-800/80 text-xs font-mono text-zinc-500">
+      <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 w-full max-w-2xl pt-2 border-t border-zinc-800/80 text-[10px] sm:text-xs font-mono text-zinc-500">
         <span>NYC SUBWAY SYSTEM</span>
         <button
           onClick={() => triggerSuccessEntry(false)}

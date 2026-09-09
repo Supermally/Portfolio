@@ -326,15 +326,15 @@ export function UnifiedTransitMap({
   // =========================================================================
 
   // 1. EE Line (Orange #ff6319) - Center x=490, Left Concourse x=100, Bottom Raceway y=3360
-  const eePathD =
+  const eePathD = LINES.find((line) => line.id === "ee-line")?.pathD ||
     "M 490 100 L 490 540 L 270 540 L 270 1340 L 490 1340 L 490 1420 L 490 1720 L 270 1720 L 270 2520 L 100 2520 L 100 3360 L 1000 3360";
 
   // 2. Aero Line (Blue #0039a6) - Center x=500, Left Concourse x=110, Bottom Raceway y=3350
-  const aeroPathD =
+  const aeroPathD = LINES.find((line) => line.id === "aero-line")?.pathD ||
     "M 500 100 L 500 620 L 730 620 L 730 1340 L 500 1340 L 500 1420 L 500 1660 L 730 1660 L 730 2560 L 110 2560 L 110 3350 L 1000 3350";
 
   // 3. Policy Line (Red #ee352e) - Center x=510, Left Concourse x=120, Bottom Raceway y=3340
-  const polisciPathD =
+  const polisciPathD = LINES.find((line) => line.id === "polisci-line")?.pathD ||
     "M 510 100 L 510 460 L 260 460 L 260 2600 L 120 2600 L 120 3340 L 1000 3340";
 
   return (
@@ -401,7 +401,7 @@ export function UnifiedTransitMap({
           </div>
 
           {/* Symbology Indicators (MTA Official Map Style) */}
-          <div className="flex items-center gap-4 font-sans text-xs text-zinc-600 font-semibold">
+          <div className="hidden md:flex items-center gap-4 font-sans text-xs text-zinc-600 font-semibold">
             <div className="flex items-center gap-1.5">
               <span className="w-5 h-3 rounded-full border-2 border-zinc-900 bg-white" />
               <span>Transfer</span>
@@ -458,10 +458,41 @@ export function UnifiedTransitMap({
       </div>
 
       {/* The Single Continuous Vertical SVG Transit Map (ViewBox 0 0 1000 3500) */}
-      <div className="w-full flex items-center justify-center relative">
+      <div className="w-full flex flex-col items-center justify-center relative">
+        <div className="md:hidden w-full px-4 pb-8 pt-64">
+          <div className="mb-5 border-b-2 border-zinc-950 pb-4">
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-500">Mobile route directory</div>
+            <h1 className="mt-1 text-3xl font-black tracking-tight text-zinc-950">Projects by stop</h1>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600">Tap a stop to open its project card. Transfer badges show every line serving that project.</p>
+          </div>
+          <div className="space-y-3">
+            {STATIONS.filter((station) => !selectedLineId || station.lines.includes(selectedLineId)).map((station, index) => {
+              const primaryLine = LINES.find((line) => station.lines.includes(line.id));
+              return (
+                <button key={station.id} onClick={() => handleStationClick(station)} className="w-full rounded-2xl border border-zinc-300 bg-white p-4 text-left shadow-sm transition active:scale-[0.99]">
+                  <div className="flex items-start gap-3">
+                    <div className="flex flex-col items-center">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-black text-white shadow-sm" style={{ backgroundColor: primaryLine?.color || "#18181b" }}>{station.letterZone || index + 1}</span>
+                      {index < STATIONS.length - 1 && <span className="mt-1 h-8 w-1 rounded-full" style={{ backgroundColor: primaryLine?.color || "#d4d4d8" }} />}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h2 className="text-base font-black leading-tight text-zinc-950">{station.title}</h2>
+                        <TransferBullet lineIds={station.lines} size="sm" />
+                      </div>
+                      <div className="mt-1 font-mono text-[10px] font-bold uppercase tracking-wide text-zinc-500">{station.date}</div>
+                      <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-zinc-600">{station.summary}</p>
+                      <div className="mt-3 flex flex-wrap gap-1.5">{station.tags.slice(0, 3).map((tag) => <span key={tag} className="rounded-md bg-zinc-100 px-2 py-1 font-mono text-[9px] font-semibold text-zinc-600">#{tag}</span>)}</div>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
         <svg
           viewBox="0 0 1000 3500"
-          className="w-full h-auto max-w-[1000px]"
+          className="hidden md:block w-full h-auto max-w-[1000px]"
           preserveAspectRatio="xMidYMid meet"
         >
           <g ref={mapSvgGroupRef} id="unified-vertical-map-group">
@@ -551,7 +582,7 @@ export function UnifiedTransitMap({
                   ref={eePathRef}
                   d={eePathD}
                   fill="none"
-                  stroke="#ff6319"
+                  stroke={LINES.find((line) => line.id === "ee-line")?.color || "#ff6319"}
                   strokeWidth="10"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -568,7 +599,7 @@ export function UnifiedTransitMap({
                   ref={aeroPathRef}
                   d={aeroPathD}
                   fill="none"
-                  stroke="#0039a6"
+                  stroke={LINES.find((line) => line.id === "aero-line")?.color || "#0039a6"}
                   strokeWidth="9"
                   strokeDasharray="14 10"
                   strokeLinecap="round"
@@ -610,7 +641,7 @@ export function UnifiedTransitMap({
                   ref={polisciPathRef}
                   d={polisciPathD}
                   fill="none"
-                  stroke="#ee352e"
+                  stroke={LINES.find((line) => line.id === "polisci-line")?.color || "#ee352e"}
                   strokeWidth="10"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -674,7 +705,7 @@ export function UnifiedTransitMap({
               {/* Grand Central Hub (Official MTA Transfer Barbell Capsule across 3 lines) */}
               <g
                 id="grand-central-terminal-hub"
-                transform="translate(500, 260)"
+                transform={`translate(${(STATIONS[0]?.coords.x ?? 50) * 10}, ${(STATIONS[0]?.coords.y ?? 10) * 26})`}
                 className="cursor-pointer group focus:outline-hidden focus-visible:ring-4 focus-visible:ring-zinc-950"
                 role="button"
                 tabIndex={0}
@@ -793,7 +824,7 @@ export function UnifiedTransitMap({
               <g ref={secondaryStationsRef} id="secondary-stations-layer">
                 {/* 1. Porta — Windows App Compatibility Runner (x=270, y=780 - Stop 1 on EE Line) */}
                 <g
-                  transform="translate(270, 780)"
+                  transform={`translate(${(STATIONS[1]?.coords.x ?? 27) * 10}, ${(STATIONS[1]?.coords.y ?? 30) * 26})`}
                   className="cursor-pointer group focus:outline-hidden focus-visible:ring-4 focus-visible:ring-zinc-950"
                   role="button"
                   tabIndex={0}
@@ -874,7 +905,7 @@ export function UnifiedTransitMap({
 
                 {/* 2. Aerospace Project Idea #1 (x=730, y=1060 - Stop 1 on Aero Line) */}
                 <g
-                  transform="translate(730, 1060)"
+                  transform={`translate(${(STATIONS[2]?.coords.x ?? 73) * 10}, ${(STATIONS[2]?.coords.y ?? 41) * 26})`}
                   className="cursor-pointer group focus:outline-hidden focus-visible:ring-4 focus-visible:ring-zinc-950"
                   role="button"
                   tabIndex={0}
@@ -917,7 +948,7 @@ export function UnifiedTransitMap({
 
                 {/* 3. Engineering Project Idea #1 (x=495, y=1420 - Stop 2 on EE Line) */}
                 <g
-                  transform="translate(495, 1420)"
+                  transform={`translate(${(STATIONS[3]?.coords.x ?? 49.5) * 10}, ${(STATIONS[3]?.coords.y ?? 54.6) * 26})`}
                   className="cursor-pointer group focus:outline-hidden focus-visible:ring-4 focus-visible:ring-zinc-950"
                   role="button"
                   tabIndex={0}
@@ -955,7 +986,7 @@ export function UnifiedTransitMap({
 
                 {/* 4. Ideology Test & Political Compass (x=260, y=1700 - Stop 1 on POL Line) */}
                 <g
-                  transform="translate(260, 1700)"
+                  transform={`translate(${(STATIONS[4]?.coords.x ?? 26) * 10}, ${(STATIONS[4]?.coords.y ?? 65.4) * 26})`}
                   className="cursor-pointer group focus:outline-hidden focus-visible:ring-4 focus-visible:ring-zinc-950"
                   role="button"
                   tabIndex={0}
@@ -991,7 +1022,7 @@ export function UnifiedTransitMap({
 
                 {/* 5. Policy Project Idea #1 (x=730, y=2020 - Stop 2 on POL Line) */}
                 <g
-                  transform="translate(730, 2020)"
+                  transform={`translate(${(STATIONS[5]?.coords.x ?? 73) * 10}, ${(STATIONS[5]?.coords.y ?? 77.7) * 26})`}
                   className="cursor-pointer group focus:outline-hidden focus-visible:ring-4 focus-visible:ring-zinc-950"
                   role="button"
                   tabIndex={0}
@@ -1029,7 +1060,7 @@ export function UnifiedTransitMap({
 
                 {/* 6. Engineering Project Idea #2 (x=270, y=2180 - Stop 3 on EE Line) */}
                 <g
-                  transform="translate(270, 2180)"
+                  transform={`translate(${(STATIONS[6]?.coords.x ?? 27) * 10}, ${(STATIONS[6]?.coords.y ?? 83.8) * 26})`}
                   className="cursor-pointer group focus:outline-hidden focus-visible:ring-4 focus-visible:ring-zinc-950"
                   role="button"
                   tabIndex={0}
@@ -1166,8 +1197,7 @@ export function UnifiedTransitMap({
         {/* Departure Board Interactive Component (EAP Light Mode Dual Screens) */}
         <div
           id="departure-board-concourse-overlay"
-          className="absolute left-0 right-0 z-30 px-4 sm:px-8 pointer-events-auto"
-          style={{ bottom: "24px" }}
+          className="relative w-full z-30 px-3 sm:px-8 pointer-events-auto md:absolute md:left-0 md:right-0 md:bottom-6"
         >
           <div className="max-w-7xl mx-auto">
             <CurrentStatus onSelectStation={onSelectStation || undefined} />

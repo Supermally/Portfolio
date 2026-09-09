@@ -9,12 +9,20 @@ export const DEFAULT_CONTENT: SiteContent = {
   stations: STATIONS,
   lines: LINES,
   waypoints: WAYPOINTS,
+  featured: {
+    activeProjectId: "station-windows-runner",
+    activeLabel: "ACTIVE WORK IN PROGRESS",
+    activeFocus: "Fixing graphics driver translation",
+    diagnosticsProjectId: "station-windows-runner",
+    diagnosticsAlert: "Investigating Windows compatibility driver translation and memory bridges",
+    diagnosticsSummary: "Bridging Windows API calls to POSIX with custom memory mapping"
+  },
   resume: {
     name: "Malachi McDonald",
     location: "Brooklyn, NY",
     status: "ACTIVE CANDIDATE",
     summary: "Site Monitor with experience managing participant records, worksite compliance, and payroll processing for NYC DYCD-administered youth workforce programs. Skilled in Microsoft 365, Excel, and ADP Payroll, with a background in computer engineering, programming, and cloud-based data analysis.",
-    pdfUrl: "/assets/resume-placeholder.pdf",
+    pdfUrl: "/assets/Malachi_McDonald_Resume.pdf",
     experiences: [
       { period: "APRIL 2026 — PRESENT", role: "SYEP Site Monitor", organization: "Good Shepherd Services", location: "Bronx, NY", type: "WORKFORCE OPERATIONS & COMPLIANCE", points: ["Manage participant, worksite, and program records and conduct regular worksite visits to monitor operations and address concerns.", "Process weekly participant payroll and maintain accurate attendance, payroll, and program documentation.", "Coordinate with worksites, program staff, and partners while assisting with youth events and activities.", "Use Microsoft 365, ADP Payroll, and NYC DYCD systems for program administration and data management."] },
       { period: "DEC 2025 — APRIL 2026", role: "Work, Learn & Grow (WLG) Site Monitor", organization: "Good Shepherd Services", location: "Bronx, NY", type: "PROGRAM MANAGEMENT & PAYROLL", points: ["Supported day-to-day operations across WLG, SYEP, and school-based internship worksites.", "Processed weekly ADP payroll for program staff and high school student interns.", "Posted employment and internship opportunities and conducted outreach to prospective worksites and organizational partners.", "Conducted worksite visits, maintained records, and supported program events and activities using Microsoft 365, ADP, and DYCD."] },

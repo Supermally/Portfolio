@@ -15,6 +15,17 @@ function isContent(value: unknown): value is SiteContent {
   return !!item && item.version === 1 && Array.isArray(item.stations) && item.stations.length > 0 && Array.isArray(item.lines) && !!item.resume && !!item.contact;
 }
 
+function normalizeContent(content: SiteContent): SiteContent {
+  return {
+    ...DEFAULT_CONTENT,
+    ...content,
+    featured: { ...DEFAULT_CONTENT.featured, ...(content.featured || {}) },
+    resume: { ...DEFAULT_CONTENT.resume, ...content.resume, pdfUrl: content.resume.pdfUrl === "/assets/resume-placeholder.pdf" ? DEFAULT_CONTENT.resume.pdfUrl : content.resume.pdfUrl },
+    contact: { ...DEFAULT_CONTENT.contact, ...content.contact },
+    lines: content.lines.map((line, index) => ({ ...DEFAULT_CONTENT.lines[index], ...line })),
+  };
+}
+
 async function readGitHubContent(): Promise<SiteContent | null> {
   const { owner, repo, branch, token } = repoSettings();
   const headers: HeadersInit = { Accept: "application/vnd.github.raw+json", "User-Agent": "grand-central-admin" };
@@ -22,13 +33,13 @@ async function readGitHubContent(): Promise<SiteContent | null> {
   const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${CONTENT_PATH}?ref=${encodeURIComponent(branch)}`, { headers, cache: "no-store" });
   if (!response.ok) return null;
   const parsed = await response.json();
-  return isContent(parsed) ? parsed : null;
+  return isContent(parsed) ? normalizeContent(parsed) : null;
 }
 
 async function readLocalContent(): Promise<SiteContent | null> {
   try {
     const parsed = JSON.parse(await fs.readFile(path.join(process.cwd(), CONTENT_PATH), "utf8"));
-    return isContent(parsed) ? parsed : null;
+    return isContent(parsed) ? normalizeContent(parsed) : null;
   } catch { return null; }
 }
 

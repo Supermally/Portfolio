@@ -88,6 +88,16 @@ export function SkillsLegend({
                     {line.description}
                   </p>
 
+                  {!!line.interlinesWith?.length && (
+                    <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-mono font-bold uppercase text-zinc-500">
+                      <span>Interlines with:</span>
+                      {line.interlinesWith.map((lineId) => {
+                        const related = LINES.find((item) => item.id === lineId);
+                        return related ? <span key={lineId} className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-50 px-2 py-1"><span className="h-2 w-2 rounded-full" style={{ backgroundColor: related.color }} />{related.bullet}</span> : null;
+                      })}
+                    </div>
+                  )}
+
                   {/* Ordered Station Sequence */}
                   <div className="space-y-1.5 border-t border-zinc-200 pt-3">
                     <span className="font-sans text-[11px] font-extrabold text-zinc-500 uppercase tracking-wider block">

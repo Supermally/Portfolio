@@ -59,12 +59,22 @@ export type ContactContent = {
   platforms: ContactPlatform[];
 };
 
+export type FeaturedDisplays = {
+  activeProjectId: string;
+  activeLabel: string;
+  activeFocus: string;
+  diagnosticsProjectId: string;
+  diagnosticsAlert: string;
+  diagnosticsSummary: string;
+};
+
 export type SiteContent = {
   version: 1;
   updatedAt: string;
   stations: Station[];
   lines: Line[];
   waypoints: Waypoint[];
+  featured: FeaturedDisplays;
   resume: ResumeContent;
   contact: ContactContent;
 };

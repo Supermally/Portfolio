@@ -114,10 +114,10 @@ export function Resume() {
   const displayedSkillCategories = resume.skillCategories.length ? resume.skillCategories : skillCategories;
 
   return (
-    <section id="resume" className="py-20 border-b border-zinc-300 bg-[#f4efe6]/60 relative select-none">
+    <section id="resume" className="py-14 sm:py-20 border-b border-zinc-300 bg-[#f4efe6]/60 relative select-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Fare Card Signage Header */}
-        <div className="border-b-2 border-zinc-950 pb-4 mb-12 flex flex-wrap items-end justify-between gap-4">
+        <div className="border-b-2 border-zinc-950 pb-4 mb-8 sm:mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-2 font-mono text-xs font-bold text-zinc-600 uppercase tracking-widest mb-1.5">
               <CreditCard className="w-3.5 h-3.5 text-[#ff6319]" />
@@ -131,7 +131,7 @@ export function Resume() {
           <a
             href={resume.pdfUrl}
             download="Malachi_McDonald_Resume.pdf"
-            className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-zinc-950 hover:bg-zinc-800 text-white rounded-xl font-sans text-xs font-black transition-all shadow-md group cursor-pointer"
+            className="inline-flex w-full sm:w-auto items-center justify-center gap-2.5 px-5 sm:px-6 py-3.5 bg-zinc-950 hover:bg-zinc-800 text-white rounded-xl font-sans text-xs font-black transition-all shadow-md group cursor-pointer"
           >
             <Download className="w-4 h-4 text-[#ff6319] group-hover:scale-110 transition-transform" />
             <span>DOWNLOAD OFFICIAL RESUME (PDF)</span>
@@ -139,7 +139,7 @@ export function Resume() {
         </div>
 
         {/* Top Summary Banner */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-zinc-900 shadow-xl mb-12">
+        <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border-2 border-zinc-900 shadow-xl mb-8 sm:mb-12">
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 pb-4 mb-4">
             <div className="flex items-center gap-3">
               <span className="w-4 h-4 rounded-full bg-[#ff6319] shadow-sm" />
@@ -168,7 +168,7 @@ export function Resume() {
               {displayedExperiences.map((exp, idx) => (
                 <div
                   key={idx}
-                  className="p-6 rounded-2xl bg-white border border-zinc-300 shadow-sm hover:shadow-md transition-shadow"
+                  className="p-4 sm:p-6 rounded-2xl bg-white border border-zinc-300 shadow-sm hover:shadow-md transition-shadow"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                     <div>

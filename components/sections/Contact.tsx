@@ -21,10 +21,10 @@ export function Contact() {
   }));
 
   return (
-    <section id="contact" className="py-20 bg-[#121214] text-white relative">
+    <section id="contact" className="py-14 sm:py-20 bg-[#121214] text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Porcelain Enamel Exit Sign Header */}
-        <div className="border-b border-zinc-800 pb-4 mb-12 flex flex-wrap items-end justify-between gap-4">
+        <div className="border-b border-zinc-800 pb-4 mb-8 sm:mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-2 font-mono text-xs font-bold text-[#00933c] uppercase tracking-widest mb-1.5">
               <Compass className="w-3.5 h-3.5" />
@@ -42,7 +42,7 @@ export function Contact() {
         {/* Main Station Dispatch Box */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
           {/* Left Column: Direct Electronic Dispatch / Email */}
-          <div className="lg:col-span-6 rounded-3xl border border-zinc-800 bg-zinc-950 p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden">
+          <div className="lg:col-span-6 rounded-2xl sm:rounded-3xl border border-zinc-800 bg-zinc-950 p-5 sm:p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden">
             <div className="space-y-4">
               <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold w-fit">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -56,10 +56,10 @@ export function Contact() {
                 {contact.intro}
               </p>
 
-              <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-between gap-3">
+              <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-[#ff6319] flex-shrink-0" />
-                  <span className="font-mono text-sm sm:text-base font-bold text-white">
+                  <span className="font-mono text-xs sm:text-base font-bold text-white break-all">
                     {email}
                   </span>
                 </div>
@@ -84,7 +84,7 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="pt-6 border-t border-zinc-800 mt-6 flex items-center justify-between font-mono text-xs text-zinc-500">
+            <div className="pt-6 border-t border-zinc-800 mt-6 flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] sm:text-xs text-zinc-500">
               <span>RESPONSE WINDOW: {contact.responseWindow}</span>
               <span>{"// PGP KEY ON REQUEST"}</span>
             </div>
@@ -100,7 +100,7 @@ export function Contact() {
                   href={platform.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-6 rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900/90 transition-all group flex flex-col justify-between space-y-3 shadow-xl"
+                  className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900/90 transition-all group flex flex-col justify-between space-y-3 shadow-xl"
                 >
                   <div className="flex items-center justify-between">
                     <span
@@ -113,7 +113,7 @@ export function Contact() {
                   </div>
 
                   <div>
-                    <h4 className="text-xl font-black text-white font-sans flex items-center gap-2">
+                    <h4 className="text-lg sm:text-xl font-black text-white font-sans flex flex-wrap items-center gap-2">
                       <Icon className="w-5 h-5 text-zinc-300" />
                       <span>{platform.channel}</span>
                       <span className="font-mono text-xs font-normal text-zinc-400">
