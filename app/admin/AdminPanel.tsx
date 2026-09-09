@@ -41,8 +41,9 @@ export function AdminPanel() {
   const login = async (event: React.FormEvent) => {
     event.preventDefault(); setBusy(true); setMessage("");
     const response = await fetch("/api/admin/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password }) });
+    const result = await response.json().catch(() => ({}));
     setBusy(false);
-    if (!response.ok) return setMessage("That password is not correct.");
+    if (!response.ok) return setMessage(result.error || "That password is not correct.");
     setAuthenticated(true); setPassword(""); await load();
   };
 

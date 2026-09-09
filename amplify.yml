@@ -1,0 +1,17 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - env | grep -e '^ADMIN_PASSWORD=' -e '^ADMIN_SESSION_SECRET=' -e '^GITHUB_CONTENT_TOKEN=' -e '^GITHUB_CONTENT_REPO=' -e '^GITHUB_CONTENT_BRANCH=' >> .env.production
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*

@@ -12,6 +12,8 @@ Add these variables to the AWS service that runs the Next.js server, then redepl
 - `GITHUB_CONTENT_REPO`: `Supermally/Portfolio`
 - `GITHUB_CONTENT_BRANCH`: `main`
 
+The included `amplify.yml` copies only these named variables into the Next.js server environment during the Amplify build. This is required because Amplify environment variables are otherwise available to the build but may not be available to server-side routes at runtime.
+
 Create the GitHub token under **GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens**. Limit repository access to `Supermally/Portfolio` and grant only **Repository permissions → Contents → Read and write**. Do not place the token in source code or commit a `.env` file.
 
 ## Local development
