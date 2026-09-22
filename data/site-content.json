@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-22T14:23:57.127Z",
+  "updatedAt": "2026-09-22T14:24:19.948Z",
   "stations": [
     {
       "id": "station-grand-central",
@@ -380,7 +380,7 @@
       {
         "title": "CompTIA IT Fundamentals+ (ITF+)",
         "issuer": "CompTIA",
-        "date": "2024",
+        "date": "May 2024",
         "badge": "COMPTIA"
       }
     ],
